@@ -15,7 +15,7 @@ class CreateCalculatesTable extends Migration
     {
         Schema::create('calculates', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('emp_id');
+            $table->integer('employee_id');
             $table->date('calculate_start');
             $table->date('calculate_end');
             $table->integer('calculate_period')->default(0);

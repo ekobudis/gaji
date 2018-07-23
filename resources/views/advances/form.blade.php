@@ -53,11 +53,11 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="form-group">
-                                    {{ Form::label('emp_id','Pegawai') }}
+                                    {{ Form::label('employee_id','Pegawai') }}
                                     @if(!$advances->id)
-                                    {{ Form::select('emp_id', $emp , null , ['id'=>'emp_id','class'=>'select2','placeholder' => 'Pilih Pegawai','style'=>'width: 100%;']) }}
+                                    {{ Form::select('employee_id', $emp , null , ['id'=>'employee_id','class'=>'select2','placeholder' => 'Pilih Pegawai','style'=>'width: 100%;']) }}
                                     @else
-                                    {{ Form::select('emp_id', $emp , $advances->emp_id , ['id'=>'emp_id','class'=>'select2','placeholder' => 'Pilih Pegawai','style'=>'width: 100%;']) }}
+                                    {{ Form::select('employee_id', $emp , $advances->emp_id , ['id'=>'employee_id','class'=>'select2','placeholder' => 'Pilih Pegawai','style'=>'width: 100%;']) }}
                                     @endif
                                 </div>
                             </div>

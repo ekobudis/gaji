@@ -52,20 +52,20 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="form-group col-md-4">
-                                {{ Form::label('dept_code','Kode Departemen',['class'=>'control-label']) }}
-                                {{ Form::text('dept_code', null, ['id'=>'dept_code', 'class'=>'form-control','placeholder'=>'Kode Departemen']) }}
+                                {{ Form::label('department_code','Kode Departemen',['class'=>'control-label']) }}
+                                {{ Form::text('department_code', null, ['id'=>'department_code', 'class'=>'form-control','placeholder'=>'Kode Departemen']) }}
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12">
-                                {{ Form::label('dept_name','Nama Departement',['class'=>'control-label']) }}
-                                {{ Form::text('dept_name', null, ['id'=>'dept_name', 'class'=>'form-control','placeholder'=>'Nama Departemen']) }}
+                                {{ Form::label('department_name','Nama Departement',['class'=>'control-label']) }}
+                                {{ Form::text('department_name', null, ['id'=>'department_name', 'class'=>'form-control','placeholder'=>'Nama Departemen']) }}
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12">
-                                {{ Form::label('dept_desc','Keterangan',['class'=>'control-label']) }}
-                                {{ Form::textarea('dept_desc', null, ['id'=>'dept_desc', 'rows'=> '3', 'class'=>'form-control','placeholder'=>'Keterangan']) }}
+                                {{ Form::label('department_desc','Keterangan',['class'=>'control-label']) }}
+                                {{ Form::textarea('department_desc', null, ['id'=>'department_desc', 'rows'=> '3', 'class'=>'form-control','placeholder'=>'Keterangan']) }}
                             </div>
                         </div>
                     </div>

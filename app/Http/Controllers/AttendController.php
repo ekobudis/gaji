@@ -22,7 +22,7 @@ class AttendController extends Controller
 
         return DataTables::of($absen)
             ->addColumn('nama', function ($absen) {
-                return $absen->pegawai->emp_name;
+                return $absen->pegawai->employee_name;
             })
             ->addColumn('tgl_masuk', function ($absen) {
                 return '<div class="text-center">'.Carbon::parse($absen->attend_date)->format('d-M-y').'</div>';
@@ -129,7 +129,7 @@ class AttendController extends Controller
     {
         $title = 'Absensi Pegawai';
         $attend = new Attend;
-        $emp = Employee::pluck('emp_name','id')->toArray();
+        $emp = Employee::pluck('employee_name','id')->toArray();
         $params = [
             'title' => $title,
             'attend' => $attend,
@@ -150,13 +150,13 @@ class AttendController extends Controller
         Carbon::setLocale('id');
 
         $errors = $this->validate($request,[
-            'emp_id' => 'required',
+            'employee_id' => 'required',
         ]);
         
         $tgl = Carbon::now();
 
         $absen = new Attend();
-        $absen->emp_id = request('emp_id');
+        $absen->employee_id = request('employee_id');
         $absen->attend_date = $tgl;
         $absen->attend_time_in = Carbon::now()->format('H:i');
         $absen->save();

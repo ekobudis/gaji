@@ -15,7 +15,7 @@ class CreateAttendsTable extends Migration
     {
         Schema::create('attends', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('emp_id');
+            $table->integer('employee_id');
             $table->date('attend_date');
             $table->time('attend_time_in');
             $table->time('attend_time_out')->nullable();

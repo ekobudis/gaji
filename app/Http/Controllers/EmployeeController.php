@@ -32,9 +32,9 @@ class EmployeeController extends Controller
         $dept_id = Department::findOrFail($department);
         
         $autonomos = DB::table('employees')
-            ->select('id','emp_id')
-            ->where('dept_id','=',$dept_id->id)
-            ->whereYear('emp_join_date','=',$prefix)
+            ->select('id','employee_id')
+            ->where('department_id','=',$dept_id->id)
+            ->whereYear('employee_join_date','=',$prefix)
             ->latest()
             ->take(1)
             ->first();
@@ -46,35 +46,35 @@ class EmployeeController extends Controller
             $n = 1;
             //dd($n);
             $tmp = sprintf('%03s', $n);
-            $nomer = $dept_id->dept_code.$thn.$tmp;
+            $nomer = $dept_id->department_code.$thn.$tmp;
             //dd($nomer);
             $id = 0;
 
-            $data = array('emp_id'=>$nomer,'id'=>$id);
+            $data = array('employee_id'=>$nomer,'id'=>$id);
 
             return response()->json($data);
 
         }else{
             $next_nomers =  DB::table('employees')
-            ->select('id','emp_id')
-            ->where('dept_id','=',$dept_id->id)
-            ->whereYear('emp_join_date','=',$prefix)
+            ->select('id','employee_id')
+            ->where('department_id','=',$dept_id->id)
+            ->whereYear('employee_join_date','=',$prefix)
             ->latest()
             ->take(1)
             ->first();
             //Employee::select('id','emp_id')->where([['sale_userlock',0],['user_id',Auth::user()->id]])->latest()->take(1)->first();
-            if($next_nomers->emp_id != null){
+            if($next_nomers->employee_id != null){
                 //buka transaksi dan loop data.. utk open transaksi baru harus di close dl transaksi yg open. bisa via hold atau bayar
-                $nexts = substr($next_nomers->emp_id,-3);
+                $nexts = substr($next_nomers->employee_id,-3);
                 //dd($nexts);
-                $n = str_replace($dept_id->dept_code.$thn, "", $nexts) + 1;
+                $n = str_replace($dept_id->department_code.$thn, "", $nexts) + 1;
                 //dd($n);
                 $tmp = sprintf('%03s', $n);
                 //dd($tmp);
-                $nomer = $dept_id->dept_code.$thn.$tmp;
+                $nomer = $dept_id->department_code.$thn.$tmp;
                 $id = $next_nomers->id;
 
-                $data = array('emp_id'=>$nomer,'id'=>$id);
+                $data = array('employee_id'=>$nomer,'id'=>$id);
 
                 return response()->json($data);
             }    
@@ -105,7 +105,7 @@ class EmployeeController extends Controller
     public function create()
     {
         $emp = new Employee;
-        $dept = Department::pluck('dept_name','id')->toArray();
+        $dept = Department::pluck('department_name','id')->toArray();
         $post = Position::pluck('position_name','id')->toArray();
         $params = [
             'title' => 'Pegawai Baru',
@@ -126,19 +126,19 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $erros = $this->validate($request,[
-            'emp_id' => 'required',
-            'emp_name' => 'required'
+            'employee_id' => 'required',
+            'employee_name' => 'required'
         ]);
 
         $emp = new Employee();
-        $emp->emp_id =  $request->emp_id;
-        $emp->emp_name =  $request->emp_name;
-        $emp->emp_birthdate =  $request->emp_birthdate;
-        $emp->emp_join_date =  $request->emp_join_date;
-        $emp->dept_id =  $request->dept_id;
+        $emp->employee_id =  $request->employee_id;
+        $emp->employee_name =  $request->employee_name;
+        $emp->employee_birthdate =  $request->employee_birthdate;
+        $emp->employee_join_date =  $request->employee_join_date;
+        $emp->department_id =  $request->department_id;
         $emp->position_id =  $request->position_id;
-        $emp->emp_basic =  $request->emp_basic;
-        $emp->emp_allowance =  $request->emp_allowance;
+        $emp->employee_basic =  $request->employee_basic;
+        $emp->employee_allowance =  $request->employee_allowance;
         $emp->user_id = Auth::user()->id;
         $emp->save();
 
@@ -165,7 +165,7 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $emp = Employee::findOrFail($id);
-        $dept = Department::pluck('dept_name','id')->toArray();
+        $dept = Department::pluck('department_name','id')->toArray();
         $post = Position::pluck('position_name','id')->toArray();
         $params = [
             'title' => 'Edit Pegawai',
@@ -187,14 +187,14 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $emp = Employee::findOrFail($id);
-        $emp->emp_id =  $request->emp_id;
-        $emp->emp_name =  $request->emp_name;
-        $emp->emp_birthdate =  $request->emp_birthdate;
-        $emp->emp_join_date =  $request->emp_join_date;
-        $emp->dept_id =  $request->dept_id;
+        $emp->employee_id =  $request->employee_id;
+        $emp->employee_name =  $request->employee_name;
+        $emp->employee_birthdate =  $request->employee_birthdate;
+        $emp->employee_join_date =  $request->employee_join_date;
+        $emp->department_id =  $request->department_id;
         $emp->position_id =  $request->position_id;
-        $emp->emp_basic =  $request->emp_basic;
-        $emp->emp_allowance =  $request->emp_allowance;
+        $emp->employee_basic =  $request->employee_basic;
+        $emp->employee_allowance =  $request->employee_allowance;
         $emp->save();
 
         return redirect()->route('employees.index')->with('success','Pegawai berhasil di update');

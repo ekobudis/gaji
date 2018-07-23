@@ -70,7 +70,7 @@ class ProjectController extends Controller
         $project->project_start = request('project_start');
         $project->project_end = request('project_end');
         $project->project_amounts = request('project_amounts');
-        $project->emp_id = request('emp_id');
+        $project->employee_id = request('employee_id');
         $project->user_id = Auth::user()->id;
         $project->save();
 
@@ -97,7 +97,7 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project = Project::findOrFail($id);
-        $emp = Employee::pluck('emp_name','id')->toArray();
+        $emp = Employee::pluck('employee_name','id')->toArray();
         
         $params = [
             'title' => 'Edit Proyek',
@@ -124,7 +124,7 @@ class ProjectController extends Controller
         $project->project_start = request('project_start');
         $project->project_end = request('project_end');
         $project->project_amounts = request('project_amounts');
-        $project->emp_id = request('emp_id');
+        $project->employee_id = request('employee_id');
         $project->user_id = Auth::user()->id;
         $project->save();
 

@@ -21,7 +21,7 @@ class CreateProjectsTable extends Migration
             $table->date('project_start');
             $table->date('project_end');
             $table->decimal('project_amounts',18,2)->default(0);
-            $table->integer('emp_id'); //Project PIC
+            $table->integer('employee_id'); //Project PIC
             $table->integer('project_status')->default(0);
             $table->integer('user_id');
             $table->timestamps();

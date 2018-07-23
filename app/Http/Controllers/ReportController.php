@@ -137,8 +137,6 @@ class ReportController extends Controller
 
         $advanced = Advance::all();
 
-        //$setting = Setting::findOrFail(1);
-
         $params = [
             'title'  => $title,
             'advanced' => $advanced,
@@ -151,6 +149,26 @@ class ReportController extends Controller
         
         //return view('accounts.pdf')->with($params);
         return $pdf->inline('advances.pdf');
+    }
+
+    public function getReportGajiPreview(Request $request)
+    {
+        $title = 'Laporan Gaji';
+
+        $calculate = Calculate::all();
+
+        $params = [
+            'title'  => $title,
+            'calculate' => $calculate,
+        ];
+
+        $pdf = PDF::loadView('calculates.pdf', [
+            'title'  => $title,
+            'calculate' => $calculate
+        ]);
+        
+        //return view('accounts.pdf')->with($params);
+        return $pdf->inline('calculates.pdf');
     }
 
     public function getFormKasbonPreview(Request $request,$id)

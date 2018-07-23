@@ -62,12 +62,12 @@
                         </thead>
                             @foreach($employees as $emp)
                                 <tr>
-                                    <td>{{ $emp->emp_id }}</td>
-                                    <td>{{ $emp->emp_name }}</td>
-                                    <td>{{ $emp->emp_join_date }}</td>
+                                    <td>{{ $emp->employee_id }}</td>
+                                    <td>{{ $emp->employee_name }}</td>
+                                    <td>{{ $emp->employee_join_date }}</td>
                                     <td></td>
                                     <td>{{ $emp->jabatan->position_name }}</td>
-                                    @if($emp->emp_status !=0 )
+                                    @if($emp->employee_status !=0 )
                                     <td class="text-center"><span class="label label-warning">Suspended</span></td>
                                     @else
                                     <td class="text-center"><span class="label label-success">Active</span></td>

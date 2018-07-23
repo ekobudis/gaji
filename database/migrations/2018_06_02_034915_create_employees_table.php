@@ -15,17 +15,16 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('emp_id',10);
-            $table->string('emp_name',80);
-            $table->string('emp_address',180)->nullable();
-            $table->date('emp_birthdate');
-            $table->date('emp_join_date');
-            $table->integer('dept_id');
-            $table->integer('position_id');
-            $table->decimal('emp_basic',12,2)->default(0);
-            $table->decimal('emp_allowance',12,2)->default(0);
-            $table->integer('emp_status')->default(0);
             $table->integer('user_id');
+            $table->integer('employee_code');
+            $table->string('employee_address',180)->nullable();
+            $table->date('employee_birthdate');
+            $table->date('employee_join_date');
+            $table->integer('department_id');
+            $table->integer('position_id');
+            $table->decimal('employee_basic',12,2)->default(0);
+            $table->decimal('employee_allowance',12,2)->default(0);
+            $table->integer('employee_status')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -38,6 +37,6 @@ class CreateEmployeesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('employeeloyees');
     }
 }

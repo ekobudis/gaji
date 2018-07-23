@@ -54,41 +54,41 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <input type="hidden" name="dept_code" id="dept_code">
+                                <input type="hidden" name="department_code" id="department_code">
                                 <div class="form-group">
-                                    {{ Form::label('emp_id','Kode Pegawai',['class'=>'control-label']) }}
-                                    {{ Form::text('emp_id', null, ['id'=>'emp_id', 'class'=>'form-control','placeholder'=>'Kode Otomatis']) }}
+                                    {{ Form::label('employee_id','Kode Pegawai',['class'=>'control-label']) }}
+                                    {{ Form::text('employee_id', null, ['id'=>'employee_id', 'class'=>'form-control','placeholder'=>'Kode Otomatis']) }}
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="form-group">
-                                    {{ Form::label('emp_name','Nama Pegawai',['class'=>'control-label']) }}
-                                    {{ Form::text('emp_name', null, ['id'=>'emp_name', 'class'=>'form-control','placeholder'=>'Nama Pegawai']) }}
+                                    {{ Form::label('employee_name','Nama Pegawai',['class'=>'control-label']) }}
+                                    {{ Form::text('employee_name', null, ['id'=>'employee_name', 'class'=>'form-control','placeholder'=>'Nama Pegawai']) }}
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    {{ Form::label('emp_join_date','Tanggal Gabung',['class'=>'control-label']) }}
-                                    {{ Form::date('emp_join_date', null, ['id'=>'emp_join_date', 'class'=>'form-control','placeholder'=>'Tgl Masuk']) }}
+                                    {{ Form::label('employee_join_date','Tanggal Gabung',['class'=>'control-label']) }}
+                                    {{ Form::date('employee_join_date', null, ['id'=>'employee_join_date', 'class'=>'form-control','placeholder'=>'Tgl Masuk']) }}
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    {{ Form::label('emp_birthdate','Tanggal Lahir',['class'=>'control-label']) }}
-                                    {{ Form::date('emp_birthdate', null, ['id'=>'emp_birthdate', 'class'=>'form-control','placeholder'=>'Tgl Lahir']) }}
+                                    {{ Form::label('employee_birthdate','Tanggal Lahir',['class'=>'control-label']) }}
+                                    {{ Form::date('employee_birthdate', null, ['id'=>'employee_birthdate', 'class'=>'form-control','placeholder'=>'Tgl Lahir']) }}
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ Form::label('dept_id','Departemen') }}
+                                    {{ Form::label('department_id','Departemen') }}
                                     @if(!$emp->id)
-                                    {{ Form::select('dept_id', $dept , null , ['id'=>'dept_id','class'=>'select','placeholder' => 'Pilih Departemen','style'=>'width: 100%;']) }}
+                                    {{ Form::select('department_id', $dept , null , ['id'=>'department_id','class'=>'select','placeholder' => 'Pilih Departemen','style'=>'width: 100%;']) }}
                                     @else
-                                    {{ Form::select('dept_id', $dept , $emp->dept_id , ['id'=>'dept_id','class'=>'select','placeholder' => 'Pilih Departemen','style'=>'width: 100%;']) }}
+                                    {{ Form::select('department_id', $dept , $emp->dept_id , ['id'=>'department_id','class'=>'select','placeholder' => 'Pilih Departemen','style'=>'width: 100%;']) }}
                                     @endif
                                 </div>
                             </div>
@@ -106,14 +106,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ Form::label('emp_basic','Gaji Pokok',['class'=>'control-label']) }}
-                                    {{ Form::number('emp_basic', null, ['id'=>'emp_basic', 'class'=>'form-control','placeholder'=>'Gaji Pokok']) }}
+                                    {{ Form::label('employee_basic','Gaji Pokok',['class'=>'control-label']) }}
+                                    {{ Form::number('employee_basic', null, ['id'=>'employee_basic', 'class'=>'form-control','placeholder'=>'Gaji Pokok']) }}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ Form::label('emp_allowance','Tunjangan',['class'=>'control-label']) }}
-                                    {{ Form::number('emp_allowance', null, ['id'=>'emp_bemp_allowanceasic', 'class'=>'form-control','placeholder'=>'Tunjangan Jabatan']) }}
+                                    {{ Form::label('employee_allowance','Tunjangan',['class'=>'control-label']) }}
+                                    {{ Form::number('employee_allowance', null, ['id'=>'employee_allowanceasic', 'class'=>'form-control','placeholder'=>'Tunjangan Jabatan']) }}
                                 </div>
                             </div>
                         </div>

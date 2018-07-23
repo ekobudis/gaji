@@ -101,11 +101,11 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                {{ Form::label('emp_id','Penanggung Jawab Proyek',['class'=>'control-label']) }}
+                                                {{ Form::label('employee_id','Penanggung Jawab Proyek',['class'=>'control-label']) }}
                                                 @if(!$project->id)
-                                                {{ Form::select('emp_id', $emp , null , ['id'=>'emp_id','class'=>'select','placeholder' => 'Pilih PIC','style'=>'width: 100%;']) }}
+                                                {{ Form::select('employee_id', $emp , null , ['id'=>'employee_id','class'=>'select','placeholder' => 'Pilih PIC','style'=>'width: 100%;']) }}
                                                 @else
-                                                {{ Form::select('emp_id', $emp , $project->emp_id , ['id'=>'emp_id','class'=>'select','placeholder' => 'Pilih PIC','style'=>'width: 100%;']) }}
+                                                {{ Form::select('employee_id', $emp , $project->employee_id , ['id'=>'employee_id','class'=>'select','placeholder' => 'Pilih PIC','style'=>'width: 100%;']) }}
                                                 @endif
                                             </div>
                                         </div>

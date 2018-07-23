@@ -59,9 +59,9 @@
                         </thead>
                             @foreach($departments as $dept)
                                 <tr>
-                                    <td>{{ $dept->dept_code }}</td>
-                                    <td>{{ $dept->dept_name }}</td>
-                                    @if($dept->dept_status !=0 )
+                                    <td>{{ $dept->department_code }}</td>
+                                    <td>{{ $dept->department_name }}</td>
+                                    @if($dept->department_status !=0 )
                                     <td class="text-center"><span class="label label-warning">Suspended</span></td>
                                     @else
                                     <td class="text-center"><span class="label label-success">Active</span></td>

@@ -69,7 +69,7 @@
                                     <td>{{ $job->project_start }}</td>
                                     <td>{{ $job->project_end }}</td>
                                     <td>{{ number_format($job->project_amounts,0) }}</td>
-                                    <td>{{ $job->petugas->emp_name }}</td>
+                                    <td>{{ $job->petugas->employee_name }}</td>
                                     @if($job->project_status !=0 )
                                     <td class="text-center"><span class="label label-warning">Suspended</span></td>
                                     @else

@@ -75,9 +75,9 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                        <li><a href=""><i class="fa fa-circle-o"></i> Laporan Kasbon</a></li>
-                        <li><a href=""><i class="fa fa-circle-o"></i> Laporan Gaji</a></li>
-                        <li><a href=""><i class="fa fa-circle-o"></i> Laporan Proyek</a></li>
+                        <li><a href="{{ url('lap_kasbon') }}"><i class="fa fa-circle-o"></i> Laporan Kasbon</a></li>
+                        <li><a href="{{ url('lap_kasbon') }}"><i class="fa fa-circle-o"></i> Laporan Gaji</a></li>
+                        <li><a href="{{ url('lap_kasbon') }}"><i class="fa fa-circle-o"></i> Laporan Proyek</a></li>
                         </ul>
                     </li>
                     <li>

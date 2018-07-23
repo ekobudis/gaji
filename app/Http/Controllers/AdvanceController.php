@@ -39,7 +39,7 @@ class AdvanceController extends Controller
     public function create()
     {
         $advances = new Advance;
-        $emp = Employee::pluck('emp_name','id')->toArray();
+        $emp = Employee::pluck('employee_name','id')->toArray();
         $params = [
             'title' => 'Kasbon Baru',
             'advances' => $advances,
@@ -65,7 +65,7 @@ class AdvanceController extends Controller
         ]);
 
         $kasbon = new Advance();
-        $kasbon->emp_id =  $request->emp_id;
+        $kasbon->employee_id =  $request->employee_id;
         $kasbon->advance_date =  $request->advance_date;
         $kasbon->advance_refund =  $request->advance_refund;
         $kasbon->advance_desc =  $request->advance_desc;
@@ -97,7 +97,7 @@ class AdvanceController extends Controller
     public function edit($id)
     {
         $advances = Advance::findOrFail($id);
-        $emp = Employee::pluck('emp_name','id')->toArray();
+        $emp = Employee::pluck('employee_name','id')->toArray();
         $params = [
             'title' => 'Edit Kasbon',
             'advances' => $advances,
@@ -117,7 +117,7 @@ class AdvanceController extends Controller
     public function update(Request $request, $id)
     {
         $kasbon = Advance::findOrFail($id);
-        $kasbon->emp_id =  $request->emp_id;
+        $kasbon->employee_id =  $request->employee_id;
         $kasbon->advance_date =  $request->advance_date;
         $kasbon->advance_refund =  $request->advance_refund;
         $kasbon->advance_desc =  $request->advance_desc;

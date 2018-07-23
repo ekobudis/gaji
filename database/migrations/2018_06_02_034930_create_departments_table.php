@@ -15,10 +15,10 @@ class CreateDepartmentsTable extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('dept_code',6);
-            $table->string('dept_name',80);
-            $table->string('dept_desc',120)->nullable();
-            $table->integer('dept_status')->default(0);
+            $table->string('department_code',6);
+            $table->string('department_name',80);
+            $table->string('department_desc',120)->nullable();
+            $table->integer('department_status')->default(0);
             $table->integer('user_id');
             $table->timestamps();
             $table->softDeletes();

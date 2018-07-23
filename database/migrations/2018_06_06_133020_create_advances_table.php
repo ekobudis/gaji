@@ -15,7 +15,7 @@ class CreateAdvancesTable extends Migration
     {
         Schema::create('advances', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('emp_id');
+            $table->integer('employee_id');
             $table->date('advance_date');
             $table->date('advance_refund');
             $table->string('advance_desc',120)->nullable();

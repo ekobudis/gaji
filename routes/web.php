@@ -66,6 +66,9 @@ Route::group( ['middleware' => ['auth','permission_clearance']], function() {
 
     Route::get('settings','SettingController@index');
 
+    //Report
+    Route::get('lap_kasbon','ReportController@getAdvancedPreview');
+    Route::get('lap_gaji','ReportController@getReportGajiPreview');
 });
 
 
