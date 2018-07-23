@@ -61,14 +61,16 @@ class CalculateController extends Controller
         $to_date =  Carbon::parse($sampai_tanggal)->format('Y-m-d');
 
         //dd($from_date);
-        $absens = DB::select('SELECT a.emp_id,b.emp_name,b.emp_basic,b.emp_allowance,
+        $absens = DB::select('SELECT emp_id,emp_name,emp_basic,emp_allowance,SUM(n+b) AS totjam,SUM(lembur) AS totlembur,
+                ((emp_basic/8)*SUM(n+b)) AS gaji,emp_allowance*SUM(lembur) AS totlembur FROM
+                (SELECT a.emp_id,b.emp_name,b.emp_basic,b.emp_allowance,
                 CASE WHEN HOUR(CONVERT(SUBTIME(TIMEDIFF( a.`attend_time_out`,a.`attend_time_in`),"1:0:0"),INT))>=8 THEN 
                 HOUR(CONVERT(SUBTIME(TIMEDIFF( a.`attend_time_out`,a.`attend_time_in`),"1:0:0"),INT)) ELSE
-                0 END AS n,CASE WHEN HOUR(CONVERT(SUBTIME(TIMEDIFF( a.`attend_time_out`,a.`attend_time_in`),"1:0:0"),INT))<8 THEN 
+                0 END AS n,CASE WHEN HOUR(CONVERT(TIMEDIFF( a.`attend_time_out`,a.`attend_time_in`),INT))<8 THEN 
                 HOUR(CONVERT(TIMEDIFF( a.`attend_time_out`,a.`attend_time_in`),INT)) ELSE 0 END AS b,
                 IFNULL(HOUR(CONVERT(TIMEDIFF(a.attend_overtime_end,a.attend_overtime_start),INT)),0) AS lembur
                 FROM attends a INNER JOIN employees b ON a.emp_id=b.id
-                WHERE a.`attend_date` >='.$from_date.' AND a.`attend_date` <='.$to_date.' ');
+                WHERE a.`attend_date` >='.$from_date.' AND a.`attend_date` <='.$to_date.' ) AS X GROUP BY emp_id' );
 
         //dd($absens);
         return response()->json($absens);

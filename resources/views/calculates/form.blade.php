@@ -146,6 +146,7 @@
                 $.ajax({
                     url : uri_proses + '/' + dari_tgl + '/sampai/'+ end_tgl, 
                     type : 'get',
+                    dataType: 'json',
                     success:function(data){
                         console.log(data);
                         $('#gajian').show();

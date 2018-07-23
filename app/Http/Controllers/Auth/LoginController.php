@@ -44,7 +44,7 @@ class LoginController extends Controller
         if ( $user->roles()->pluck('name')->implode(' ') =='Admin' ) {// do your margic here
             return redirect()->action('HomeController@index');
         } else{
-            return redirect()->action('AttendController@index');
+            return redirect()->route('absen_pegawai');
         }
         return redirect()->action('HomeController@index');
         //return $next($request);

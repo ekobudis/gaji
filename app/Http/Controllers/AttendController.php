@@ -109,6 +109,17 @@ class AttendController extends Controller
         return view('attends.index')->with($params);
     }
 
+    public function absenpegawai()
+    {
+        $title = 'Absensi Pegawai';
+        //$attend = Attend::with('pegawai')->get();
+        $params = [
+            'title' => $title,
+            //'attend' => $attend,
+        ];
+
+        return view('attends.absen')->with($params);
+    }
     /**
      * Show the form for creating a new resource.
      *

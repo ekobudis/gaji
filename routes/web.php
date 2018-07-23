@@ -47,6 +47,7 @@ Route::group( ['middleware' => ['auth','permission_clearance']], function() {
     Route::patch('overtime/{id}','AttendController@updateLembur');
     Route::get('get_dataovertime/{id}','AttendController@getDetailEmpLembur');
     Route::get('absensi','AttendController@getAllAttend');
+    Route::get('absen_pegawai','AttendController@absenpegawai');
 
     Route::resource('calculates','CalculateController');
     Route::get('tarik_data/{dari_tgl}/sampai/{tanggal}','CalculateController@getDataAbsensi');
