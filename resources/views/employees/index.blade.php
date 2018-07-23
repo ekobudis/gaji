@@ -62,10 +62,10 @@
                         </thead>
                             @foreach($employees as $emp)
                                 <tr>
-                                    <td>{{ $emp->employee_id }}</td>
-                                    <td>{{ $emp->employee_name }}</td>
+                                    <td>{{ $emp->employee_code }}</td>
+                                    <td>{{ $emp->user->name }}</td>
                                     <td>{{ $emp->employee_join_date }}</td>
-                                    <td></td>
+                                    <td>{{ $emp->departemen->department_name }}</td>
                                     <td>{{ $emp->jabatan->position_name }}</td>
                                     @if($emp->employee_status !=0 )
                                     <td class="text-center"><span class="label label-warning">Suspended</span></td>

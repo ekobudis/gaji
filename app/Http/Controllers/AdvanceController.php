@@ -39,7 +39,9 @@ class AdvanceController extends Controller
     public function create()
     {
         $advances = new Advance;
-        $emp = Employee::pluck('employee_name','id')->toArray();
+        $emp = Employee::with('user')->get()->pluck('user.name','id')->toArray(); //->pluck('user.name','employee.id')->toArray();
+        //dd($emp);
+        //$emp = Employee::pluck('employee_name','id')->toArray();
         $params = [
             'title' => 'Kasbon Baru',
             'advances' => $advances,
@@ -58,7 +60,7 @@ class AdvanceController extends Controller
     public function store(Request $request)
     {
         $erros = $this->validate($request,[
-            'emp_id' => 'required',
+            'employee_id' => 'required',
             'advance_date' => 'required',
             'advance_desc' => 'required',
             'advance_amount' => 'required'

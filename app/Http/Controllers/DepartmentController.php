@@ -61,13 +61,13 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $erros = $this->validate($request,[
-            'dept_name' => 'required'
+            'department_name' => 'required'
         ]);
 
         $dept = new Department();
-        $dept->dept_code =  $request->dept_code;
-        $dept->dept_name =  $request->dept_name;
-        $dept->dept_desc =  $request->dept_desc;
+        $dept->department_code =  $request->department_code;
+        $dept->department_name =  $request->department_name;
+        $dept->department_desc =  $request->department_desc;
         $dept->user_id = Auth::user()->id;
         $dept->save();
 
@@ -112,9 +112,9 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         $dept = Department::findOrFail($id);
-        $dept->dept_code =  $request->dept_code;
-        $dept->dept_name =  $request->dept_name;
-        $dept->dept_desc =  $request->dept_desc;
+        $dept->department_code =  $request->department_code;
+        $dept->department_name =  $request->department_name;
+        $dept->department_desc =  $request->department_desc;
         $dept->save();
 
         return redirect()->route('departments.index')->with('success','Departemen berhasil di update');

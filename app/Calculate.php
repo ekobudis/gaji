@@ -15,6 +15,6 @@ class Calculate extends Model
 
     public function pegawai()
     {
-        return $this->belongsTo('App\Employee','emp_id','id');
+        return $this->belongsTo('App\Employee','employee_id','id');
     }
 }

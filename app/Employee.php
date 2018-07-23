@@ -19,7 +19,7 @@ class Employee extends Model
 
     public function departemen()
     {
-        return $this->belongsTo('App\Department','dept_id','id');
+        return $this->belongsTo('App\Department','department_id','id');
     }
 
     public function jabatan()

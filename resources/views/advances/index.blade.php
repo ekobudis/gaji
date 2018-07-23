@@ -63,10 +63,10 @@
                         </thead>
                             @foreach($advances as $dept)
                                 <tr>
-                                    <td>{{ $dept->pegawai->emp_name }}</td>
+                                    <td>{{ $dept->pegawai->user->name }}</td>
                                     <td>{{ $dept->advance_date }}</td>
                                     <td>{{ $dept->advance_refund }}</td>
-                                    <td>{{ $dept->pegawai->departemen->dept_name }}</td>
+                                    <td>{{ $dept->pegawai->departemen->department_name }}</td>
                                     <td>{{ $dept->advance_desc }}</td>
                                     <td class="text-right">{{ number_format($dept->advance_amount,0) }}</td>
                                     <td></td>

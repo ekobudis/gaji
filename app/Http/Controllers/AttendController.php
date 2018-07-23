@@ -129,7 +129,7 @@ class AttendController extends Controller
     {
         $title = 'Absensi Pegawai';
         $attend = new Attend;
-        $emp = Employee::pluck('employee_name','id')->toArray();
+        $emp = Employee::with('user')->get()->pluck('user.name','id')->toArray();
         $params = [
             'title' => $title,
             'attend' => $attend,

@@ -57,7 +57,7 @@
                                     @if(!$advances->id)
                                     {{ Form::select('employee_id', $emp , null , ['id'=>'employee_id','class'=>'select2','placeholder' => 'Pilih Pegawai','style'=>'width: 100%;']) }}
                                     @else
-                                    {{ Form::select('employee_id', $emp , $advances->emp_id , ['id'=>'employee_id','class'=>'select2','placeholder' => 'Pilih Pegawai','style'=>'width: 100%;']) }}
+                                    {{ Form::select('employee_id', $emp , $advances->employee_id , ['id'=>'employee_id','class'=>'select2','placeholder' => 'Pilih Pegawai','style'=>'width: 100%;']) }}
                                     @endif
                                 </div>
                             </div>
@@ -118,7 +118,8 @@
 	@push('scripts')
     
 	<script type="text/javascript">
-		$('#emp_id').select2();
+		$('#employee_id').select2();
+        
 		$.ajaxSetup({
 			headers: {
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -37,8 +37,8 @@ class ProjectController extends Controller
     public function create()
     {
         $project = new Project;
-        $emp = Employee::pluck('emp_name','id')->toArray();
-        
+        $emp = Employee::with('user')->get()->pluck('user.name','id')->toArray(); //->pluck('user.name','employee.id')->toArray();
+        //dd($emp);
         $params = [
             'title' => 'Proyek Baru',
             'project' => $project,

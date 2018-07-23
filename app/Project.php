@@ -19,6 +19,6 @@ class Project extends Model
 
     public function petugas()
     {
-        return $this->belongsTo('App\Employee','emp_id','id');
+        return $this->belongsTo('App\Employee','employee_id','id');
     }
 }

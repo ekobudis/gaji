@@ -54,10 +54,10 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <input type="hidden" name="department_code" id="department_code">
+                                <input type="hidden" name="id" id="id">
                                 <div class="form-group">
-                                    {{ Form::label('employee_id','Kode Pegawai',['class'=>'control-label']) }}
-                                    {{ Form::text('employee_id', null, ['id'=>'employee_id', 'class'=>'form-control','placeholder'=>'Kode Otomatis']) }}
+                                    {{ Form::label('employee_code','Kode Pegawai',['class'=>'control-label']) }}
+                                    {{ Form::text('employee_code', null, ['id'=>'employee_code', 'class'=>'form-control','placeholder'=>'Kode Otomatis']) }}
                                 </div>
                             </div>
                             <div class="col-md-8">
@@ -67,6 +67,40 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {{ Form::label('email','Email',['class'=>'control-label']) }}
+                                    {{ Form::email('email', null, ['id'=>'email', 'class'=>'form-control','placeholder'=>'Masukkan Email']) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="hidden" name="department_code" id="department_code">
+                                <div class="form-group">
+                                    {{ Form::label('password','Password',['class'=>'control-label']) }}
+                                    {{ Form::password('password', null, ['id'=>'password', 'class'=>'form-control','placeholder'=>'Password']) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {{ Form::label('password-confirm','Konfirmasi Password',['class'=>'control-label']) }}
+                                    {{ Form::password('password-confirm', null, ['id'=>'password-confirm', 'class'=>'form-control','placeholder'=>'Password']) }}
+                                </div>
+                            </div>
+                        </div>
+                            <div class="form-group @if ($errors->has('roles')) has-error @endif">
+                            @if(!$emp->id)
+                                @foreach ($roles as $role)
+                                    {{ Form::checkbox('roles[]',  $role->id,'',['class'=>'styled'] ) }}
+                                    {{ Form::label($role->name,  ucfirst($role->name),['class'=>'control-label']) }}<br>
+                                @endforeach
+                            @else
+                                @foreach ($roles as $role)
+                                    {{ Form::checkbox('roles[]',  $role->id,$user->roles,['class'=>'styled'] ) }}
+                                    {{ Form::label($role->name,  ucfirst($role->name),['class'=>'control-label']) }}<br>
+                                @endforeach
+                            @endif
+                            </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -147,15 +181,15 @@
         var uri_nomer = "{{ url('nomer_karyawan') }}";
         var uri_dept = "{{ url('dept_code') }}";
 
-        $('#dept_id').select2();
+        $('#department_id').select2();
         $('#position_id').select2();
 
-        $('#emp_join_date').change(function(){
-            var tgl =$('#emp_join_date').val();
+        $('#employee_join_date').change(function(){
+            var tgl =$('#employee_join_date').val();
             
-            if($('#dept_id').val()!=null){
-                var dept = $('#dept_code').val();
-                var dept_id = $('#dept_id').val();
+            if($('#department_id').val()!=null){
+                var dept = $('#department_code').val();
+                var dept_id = $('#department_id').val();
             }else{
                 var dept = '';
                 var dept_id = 0;
@@ -167,15 +201,16 @@
                 success:function(data){
                     console.log(data);
                     //$('#nomer_pembelian').text(data);
-                    $('#emp_id').val(data.emp_id);
+                    $('#employee_code').val(data.employee_id);
                 }
             });
         });
 
-        $('#dept_id').change(function(){
-            
-            if($('#dept_id').val()!=null){
-                var dept = $('#dept_id').val();
+        $('#department_id').change(function(){
+            var dept_id = $('#department_id').val();
+            var tgl =$('#employee_join_date').val();
+            if($('#department_id').val()!=null){
+                var dept = $('#department_id').val();
             }else{
                 var dept = '';
             }
@@ -184,11 +219,22 @@
                 dataType : 'json',
                 url : uri_dept + '/' +  dept ,
                 success:function(data){
-                    console.log(data.dept_code);
+                    console.log(data.department_code);
                     //$('#nomer_pembelian').text(data);
-                    $('#dept_code').val(data.dept_code);
+                    $('#department_code').val(data.department_code);
                 }
             });
+            if(tgl != null){
+                $.ajax({
+                    dataType : 'json',
+                    url : uri_nomer + '/' +  dept_id + '/' + tgl ,
+                    success:function(data){
+                        console.log(data);
+                        //$('#nomer_pembelian').text(data);
+                        $('#employee_code').val(data.employee_id);
+                    }
+                });
+            }
         });
 
 		$.ajaxSetup({

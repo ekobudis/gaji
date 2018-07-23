@@ -100,7 +100,7 @@
     
 	<script type="text/javascript">
         
-        $('#emp_id').select2();
+        $('#employee_id').select2();
 
 		$.ajaxSetup({
 			headers: {
