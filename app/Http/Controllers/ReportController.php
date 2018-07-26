@@ -83,7 +83,7 @@ class ReportController extends Controller
             'project' => $project
         ]);
         
-        //return view('accounts.pdf')->with($params);
+        //return view('projects.pdf')->with($params);
         return $pdf->inline('projects.pdf');
     }
 

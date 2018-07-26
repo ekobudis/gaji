@@ -9,6 +9,7 @@ use App\Role;
 use App\Department;
 use App\Position;
 use App\Employee;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -76,7 +77,7 @@ class EmployeeController extends Controller
                 $nomer = $dept_id->department_code.$thn.$tmp;
                 $id = $next_nomers->id;
 
-                $data = array('employee_id'=>$nomer,'id'=>$id);
+                $data = array('employee_code'=>$nomer,'id'=>$id);
 
                 return response()->json($data);
             }    

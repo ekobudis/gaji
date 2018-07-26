@@ -3,6 +3,9 @@
 use App\Permission;
 use App\Role;
 use App\User;
+use App\Employee;
+use App\Department;
+use App\Position;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -58,6 +61,9 @@ class DatabaseSeeder extends Seeder
     {
         $user = factory(User::class)->create();
         $user->assignRole($role->name);
+        $emp = new Employee();
+        $emp->user_id = $user->id;
+        $emp->save();
         if( $role->name == 'Admin' ) {
             $this->command->info('Admin Login Details:');
             $this->command->warn('Username : '.$user->email);

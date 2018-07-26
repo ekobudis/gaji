@@ -55,7 +55,7 @@ Route::group( ['middleware' => ['auth','permission_clearance']], function() {
 
     Route::resource('users','UserController');
     Route::get('preview-users','ReportController@getUserPreview');
-
+    Route::get('profile/{id}','UserController@getProfile');
     //Role Access
     Route::resource('roles', 'RoleController');
     Route::get('datagrid_roles','RoleController@getAllRoles');
@@ -69,6 +69,8 @@ Route::group( ['middleware' => ['auth','permission_clearance']], function() {
     //Report
     Route::get('lap_kasbon','ReportController@getAdvancedPreview');
     Route::get('lap_gaji','ReportController@getReportGajiPreview');
+    Route::get('lap_proyek','ReportController@');
+    
 });
 
 

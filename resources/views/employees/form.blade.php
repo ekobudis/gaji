@@ -201,7 +201,7 @@
                 success:function(data){
                     console.log(data);
                     //$('#nomer_pembelian').text(data);
-                    $('#employee_code').val(data.employee_id);
+                    $('#employee_code').val(data.employee_code);
                 }
             });
         });
@@ -231,7 +231,7 @@
                     success:function(data){
                         console.log(data);
                         //$('#nomer_pembelian').text(data);
-                        $('#employee_code').val(data.employee_id);
+                        $('#employee_code').val(data.employee_code);
                     }
                 });
             }

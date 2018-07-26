@@ -74,13 +74,13 @@
                             @foreach($pegawai as $key => $value )
                                 <div class="row btm">
                                     <div class="col-xs-2">
-                                        {{$value->emp_id}}
+                                        {{$value->employee_code}}
                                     </div>
                                     <div class="col-xs-4">
-                                        {{$value->emp_name}}
+                                        {{$value->employee_name}}
                                     </div>
                                     <div class="col-xs-3">
-                                        {{ \Carbon::parse($value->emp_join_date)->format('d-M-y') }}
+                                        {{ \Carbon\Carbon::parse($value->employee_join_date)->format('d-M-y') }}
                                     </div>
                                     <div class="col-xs-3">
                                         {{ $value->jabatan->position_name }}

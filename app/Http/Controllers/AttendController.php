@@ -18,11 +18,12 @@ class AttendController extends Controller
 
     public function getAllAttend()
     {
-        $absen = Attend::with('pegawai')->get();
+        $absen = Attend::with('pegawai','user')->get();
 
+        //dd($absen);
         return DataTables::of($absen)
             ->addColumn('nama', function ($absen) {
-                return $absen->pegawai->employee_name;
+                return $absen->pegawai->user->name;
             })
             ->addColumn('tgl_masuk', function ($absen) {
                 return '<div class="text-center">'.Carbon::parse($absen->attend_date)->format('d-M-y').'</div>';
@@ -148,7 +149,6 @@ class AttendController extends Controller
     public function store(Request $request)
     {
         Carbon::setLocale('id');
-
         $errors = $this->validate($request,[
             'employee_id' => 'required',
         ]);
@@ -158,7 +158,7 @@ class AttendController extends Controller
         $absen = new Attend();
         $absen->employee_id = request('employee_id');
         $absen->attend_date = $tgl;
-        $absen->attend_time_in = Carbon::now()->format('H:i');
+        $absen->attend_time_in = Carbon::now('Asia/Jakarta')->format('H:i');
         $absen->save();
 
         return redirect()->route('attends.index')->with('success','Absen berhasil di simpan');

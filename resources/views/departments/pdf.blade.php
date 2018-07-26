@@ -71,10 +71,10 @@
                             @foreach($department as $key => $value )
                                 <div class="row btm">
                                     <div class="col-xs-3">
-                                        {{$value->dept_id}}
+                                        {{$value->department_code}}
                                     </div>
                                     <div class="col-xs-7">
-                                        {{$value->dept_name}}
+                                        {{$value->department_name}}
                                     </div>
                                     <div class="col-xs-2 text-center">
                                     

@@ -80,7 +80,7 @@
                                         {{$value->project_name }}
                                     </div>
                                     <div class="col-xs-3">
-                                        {{$value->petugas->emp_name }}
+                                        {{$value->petugas->user->name }}
                                     </div>
                                     <div class="col-xs-2 text-right">
                                         {{ number_format($value->project_amount,0) }}

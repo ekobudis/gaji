@@ -6,6 +6,7 @@ use Auth;
 use PDF;
 use App\Role;
 use App\User;
+use App\Employee;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -68,6 +69,26 @@ class UserController extends Controller
         ];
 
         return view('users.form')->with($params);   
+    }
+
+    public function getProfile($id)
+    {
+        $user = User::findOrFail($id);
+        $emp = Employee::where('user_id','=',$id)->first();
+        if(!$emp){
+            $emp = Employee::where('user_id','=',$id)->first();
+        }else{
+            $emp = new Employee;
+        }
+        $roles = Role::get();
+        $params = [
+            'title' => 'Edit Profile',
+            'roles' => $roles,
+            'user' => $user,
+            'emp' => $emp,
+        ];
+
+        return view('users.profile')->with($params);      
     }
 
     public function update(Request $request, $id)
