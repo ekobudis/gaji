@@ -10,12 +10,54 @@ use App\Calculate;
 use Carbon\Carbon;
 use App\Helpers\Helper;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class CalculateController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function getDataListGaji()
+    {
+        $gaji = Calculate::with('pegawai')->get();
+
+        //dd($gaji);
+
+        return DataTables::of($gaji)
+            ->addColumn('nama', function ($gaji) {
+                return $gaji->pegawai->user->name;
+            })
+            ->addColumn('periode', function ($gaji) {
+                $dt_object =Carbon::createFromFormat('!m', $gaji->calculate_period);
+                return '<div class="text-center">'.$dt_object->format('F').'</div>';
+            })
+            ->addColumn('total_masuk', function ($gaji) {
+                return '<div class="text-center">'.$gaji->calculate_attend.'</div>';
+            })
+            ->addColumn('total_lembur', function ($gaji) {
+                return '<div class="text-center">'.$gaji->calculate_overtime.'</div>';  
+            })
+            ->addColumn('gaji_pokok', function ($gaji) {
+                return '<div class="text-right">'. number_format($gaji->calculate_gapok,0) .'</div>';
+            })
+            ->addColumn('tunjangan', function ($gaji) {
+                return '<div class="text-right">'. number_format($gaji->calculate_allowance,0) .'</div>';
+            })
+            ->addColumn('lemburan', function ($gaji) {
+                return '<div class="text-right">'. number_format($gaji->calculate_overtime_amount,0).'</div>';
+            })
+            ->addColumn('total_gaji', function ($gaji) {
+                return '<div class="text-right">'. number_format($gaji->calculate_gapok+$gaji->calculate_allowance+$gaji->calculate_overtime_amount,0) .'</div>';
+                //return '';
+            })
+            ->addColumn('action', function ($gaji) {
+                return '<div class="text-center"><a href="preview_slip/'.$gaji->id.'" target="_blank" onclick="attendOut('.$gaji->id.')" ><i class="fa fa-print"></i></a>
+                </div>';
+            })
+            ->rawColumns(['nama','periode','total_masuk','total_lembur','gaji_pokok','tunjangan','lemburan','total_gaji','action'])
+            ->make(true);
     }
     /**
      * Display a listing of the resource.
@@ -35,6 +77,15 @@ class CalculateController extends Controller
         return view('calculates.index')->with($param);
     }
 
+    public function list_datagaji()
+    {
+        $title = 'Daftar Gaji';
+        $param = [
+            'title' => $title,
+        ];
+
+        return view('calculates.listgaji')->with($param);
+    }
     /**
      * Show the form for creating a new resource.
      *

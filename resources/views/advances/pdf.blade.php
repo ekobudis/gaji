@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-xs-2"></div>
                         <div class="col-xs-6">
-                            <h3 class="pull-center" style="display: inline-block;"> Daftar Pinjaman </h3><br>
+                            <h3 class="pull-right" style="display: inline-block;"> Daftar Pinjaman </h3><br>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                                 <div class="col-xs-2">
                                     <strong>Tgl Pinjam</strong>
                                 </div>
-                                <div class="col-xs-3">
+                                <div class="col-xs-3 text-right">
                                     <strong>Jml Pinjam</strong>
                                 </div>
                             </div>
@@ -74,20 +74,39 @@
                             @foreach($advanced as $key => $value )
                                 <div class="row btm">
                                     <div class="col-xs-4">
-                                        {{$value->pegawai->emp_name }}
+                                        {{$value->pegawai->user->name }}
                                     </div>
                                     <div class="col-xs-3">
-                                        {{$value->pegawai->departemen->dept_name }}
+                                        {{$value->pegawai->departemen->department_name }}
                                     </div>
                                     <div class="col-xs-2">
-                                        {{ $value->advance_date }}
+                                        {{ \Carbon\Carbon::parse($value->advance_date)->format('d-M-Y') }}
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-3 text-right">
                                         {{ number_format($value->advance_amount,0) }}
                                     </div>
                                 </div>
                             @endforeach
-
+                            <div class="row btmth">
+                                <div class="col-xs-9">
+                                    Total Kasbon :
+                                </div>
+                                <div class="col-xs-3 text-right">
+                                    <strong>{{ number_format($advanced->sum('advance_amount'),0 ) }}</strong>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row btmth">
+                                <div class="col-xs-4">
+                                    Dibuat Oleh : <br><br><br><br><br>
+                                </div>
+                                <div class="col-xs-4">
+                                    Disetujui Oleh : <br><br><br><br><br>
+                                </div>
+                                <div class="col-xs-4">
+                                    Diketahui Oleh : <br><br><br><br><br>
+                                </div>
+                            </div>
                         </div>
                         
                     </div>

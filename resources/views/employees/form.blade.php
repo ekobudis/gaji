@@ -63,7 +63,11 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     {{ Form::label('employee_name','Nama Pegawai',['class'=>'control-label']) }}
+                                    @if(!$emp->id)
                                     {{ Form::text('employee_name', null, ['id'=>'employee_name', 'class'=>'form-control','placeholder'=>'Nama Pegawai']) }}
+                                    @else
+                                    {{ Form::text('employee_name', $user->name, ['id'=>'employee_name', 'class'=>'form-control','placeholder'=>'Nama Pegawai']) }}
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -71,7 +75,11 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     {{ Form::label('email','Email',['class'=>'control-label']) }}
+                                    @if(!$emp->id)
                                     {{ Form::email('email', null, ['id'=>'email', 'class'=>'form-control','placeholder'=>'Masukkan Email']) }}
+                                    @else
+                                    {{ Form::email('email', $user->email , ['id'=>'email', 'class'=>'form-control','placeholder'=>'Masukkan Email']) }}
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-md-4">

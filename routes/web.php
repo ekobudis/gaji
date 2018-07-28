@@ -48,7 +48,7 @@ Route::group( ['middleware' => ['auth','permission_clearance']], function() {
     Route::resource('attends','AttendController');
     Route::patch('updateAbsenKeluar/{id}','AttendController@updateAbsenKeluar');
     Route::get('populate_absensi','AttendController@getLoadDataAbsen');
-    
+
     Route::patch('overtime/{id}','AttendController@updateLembur');
     Route::get('get_dataovertime/{id}','AttendController@getDetailEmpLembur');
     Route::get('absensi','AttendController@getAllAttend');
@@ -56,7 +56,8 @@ Route::group( ['middleware' => ['auth','permission_clearance']], function() {
 
     Route::resource('calculates','CalculateController');
     Route::get('tarik_data/{dari_tgl}/sampai/{tanggal}','CalculateController@getDataAbsensi');
-    //Route::get('list_payroll','CalculateController@getListPayroll');
+    Route::get('list_payroll','CalculateController@getDataListGaji');
+    Route::get('list_datagaji','CalculateController@list_datagaji');
 
     Route::resource('users','UserController');
     Route::get('preview-users','ReportController@getUserPreview');
@@ -75,6 +76,10 @@ Route::group( ['middleware' => ['auth','permission_clearance']], function() {
     Route::get('lap_kasbon','ReportController@getAdvancedPreview');
     Route::get('lap_gaji','ReportController@getReportGajiPreview');
     Route::get('lap_proyek','ReportController@');
+    Route::get('lap_absensipegawai/{id}','ReportController@getAbsensiPerPegawaiPreview');
+    Route::get('preview_listgaji','ReportController@getReportGajiPreview');
+    Route::get('preview_absen','ReportController@getAbsensiPegawaiPreview');
+    Route::get('preview_slip/{id}','ReportController@getSlipGajiPreview');
     
 });
 

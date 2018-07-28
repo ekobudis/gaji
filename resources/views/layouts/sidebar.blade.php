@@ -64,9 +64,10 @@
                         <li><a href="{{ url('attends') }}"><i class="fa fa-circle-o"></i> Absensi</a></li>
                         <li><a href="{{ url('advanceds') }}"><i class="fa fa-circle-o"></i> Pengajuan Kasbon</a></li>
                         <li><a href="{{ url('calculates') }}"><i class="fa fa-circle-o"></i> Perhitungan Gaji</a></li>
+                        <li><a href="{{ url('list_datagaji') }}"><i class="fa fa-circle-o"></i> Daftar Gaji</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
+                    <!--<li class="treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
                             <span>Laporan</span>
@@ -75,11 +76,11 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                        <li><a href="{{ url('lap_kasbon') }}"><i class="fa fa-circle-o"></i> Laporan Kasbon</a></li>
-                        <li><a href="{{ url('lap_kasbon') }}"><i class="fa fa-circle-o"></i> Laporan Gaji</a></li>
-                        <li><a href="{{ url('lap_kasbon') }}"><i class="fa fa-circle-o"></i> Laporan Proyek</a></li>
+                        <li><a href="{{--url('lap_kasbon')--}}"><i class="fa fa-circle-o"></i> Laporan Kasbon</a></li>
+                        <li><a href="{{--url('lap_kasbon')--}}"><i class="fa fa-circle-o"></i> Laporan Gaji</a></li>
+                        <li><a href="{{--url('lap_kasbon')--}}"><i class="fa fa-circle-o"></i> Laporan Proyek</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="{{ url('settings') }}">
                             <i class="fa fa-gear"></i> <span>Settings</span>

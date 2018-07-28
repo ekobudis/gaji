@@ -43,7 +43,6 @@
                     <ul class="treeview-menu">
                     <li><a href="{{ url('absen') }}"><i class="fa fa-circle-o"></i> Absensi</a></li>
                     <li><a href="{{ url('advanceds') }}"><i class="fa fa-circle-o"></i> Pengajuan Kasbon</a></li>
-                    <li><a href="{{ url('calculates') }}"><i class="fa fa-circle-o"></i> Perhitungan Gaji</a></li>
                     </ul>
                 </li>
                 <li><a href="{{ route('logout') }}"><i class="fa fa-circle-o text-red"></i> <span>Log Out</span></a></li>

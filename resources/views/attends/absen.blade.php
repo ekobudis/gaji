@@ -65,13 +65,11 @@
                 <!-- About Me Box -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">About Me</h3>
+                        <h3 class="box-title">Slip Gaji</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
-                        <p class="text-muted">
-                        </p>
+                        
                     </div>
                 <!-- /.box-body -->
                 </div>
@@ -84,6 +82,9 @@
                         <li>
                             <a href="#settings" data-toggle="tab">Absensi Bulan Ini :  {{ \Carbon\Carbon::parse($tgl_awal)->format('d-M-Y') }} sampai {{ \Carbon\Carbon::parse($tgl_sekarang)->format('d-M-Y') }} </a>
                         </li>
+                        <div class="text-right">
+                            <a href="{{ url('preview-absensi/'.$emp->id) }}" target="_blank"><i class="fa fa-print"></i></a>
+                        </div>
                     </ul>
                     <div class="tab-content">
                         <div class="active tab-pane" id="settings">

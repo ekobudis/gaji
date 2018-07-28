@@ -186,11 +186,13 @@ class EmployeeController extends Controller
         $emp = Employee::findOrFail($id);
         $dept = Department::pluck('department_name','id')->toArray();
         $post = Position::pluck('position_name','id')->toArray();
-        $roles = Role::get(); 
+        $roles = Role::get();
+        $user = User::findOrFail($emp->user_id);
         $params = [
             'title' => 'Edit Pegawai',
             'emp' => $emp,
             'post' => $post,
+            'user'=>$user,
             'dept' => $dept,
             'roles' => $roles,
         ];
