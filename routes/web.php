@@ -21,6 +21,8 @@ Auth::routes();
 Route::group( ['middleware' => ['auth','permission_clearance']], function() {
 
     Route::get('/home', 'HomeController@index')->name('home');
+    //Absensi Pegawai
+    Route::get('absen','HomeController@absensi')->name('absen');
 
     Route::resource('positions','PositionController');
     Route::get('preview-positions','ReportController@getPositionPreview');
@@ -44,6 +46,9 @@ Route::group( ['middleware' => ['auth','permission_clearance']], function() {
     Route::get('preview-advanced','ReportController@getAdvancedPreview');
 
     Route::resource('attends','AttendController');
+    Route::patch('updateAbsenKeluar/{id}','AttendController@updateAbsenKeluar');
+    Route::get('populate_absensi','AttendController@getLoadDataAbsen');
+    
     Route::patch('overtime/{id}','AttendController@updateLembur');
     Route::get('get_dataovertime/{id}','AttendController@getDetailEmpLembur');
     Route::get('absensi','AttendController@getAllAttend');

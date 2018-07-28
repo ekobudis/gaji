@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\User;
+use App\Role;
 use App\Attend;
 use App\Employee;
 use Carbon\Carbon;
@@ -16,9 +18,25 @@ class AttendController extends Controller
         $this->middleware('auth');
     }
 
+    public function getLoadDataAbsen()
+    {
+        $user = Auth::user()->id;
+        $tgl_sekarang = Carbon::now()->format('Y-m-d');
+        $tgl_awal =Carbon::create(Carbon::now()->format('Y'),Carbon::now()->format('m'),1)->format('Y-m-d');
+        //dd($tgl_awal);
+        $emp = Employee::where('user_id','=',Auth::user()->id )->first();
+        $absens = Attend::with('pegawai','user')->where([['employee_id','=',$emp->id],['attend_date','>=',$tgl_awal],['attend_date','<=',$tgl_sekarang]])->get();
+        
+        return response()->json($absens);
+    }
     public function getAllAttend()
     {
-        $absen = Attend::with('pegawai','user')->get();
+        $tgl_sekarang = Carbon::now()->format('Y-m-d');
+        $tgl_awal =Carbon::create(Carbon::now()->format('Y'),Carbon::now()->format('m'),1)->format('Y-m-d');
+        
+        $absen = Attend::with('pegawai','user')
+                ->where([['attend_date','>=',$tgl_awal],['attend_date','<=',$tgl_sekarang]])
+                ->get();
 
         //dd($absen);
         return DataTables::of($absen)
@@ -149,19 +167,23 @@ class AttendController extends Controller
     public function store(Request $request)
     {
         Carbon::setLocale('id');
-        $errors = $this->validate($request,[
-            'employee_id' => 'required',
-        ]);
         
         $tgl = Carbon::now();
+        $emp = Employee::where('user_id','=',Auth::user()->id )->first();
+        
+        $user = User::findOrFail(Auth::user()->id);
 
         $absen = new Attend();
-        $absen->employee_id = request('employee_id');
+        $absen->employee_id = $emp->id;
         $absen->attend_date = $tgl;
         $absen->attend_time_in = Carbon::now('Asia/Jakarta')->format('H:i');
         $absen->save();
 
-        return redirect()->route('attends.index')->with('success','Absen berhasil di simpan');
+        if ( $user->roles()->pluck('name')->implode(' ') =='Admin' ) {
+            return redirect()->route('attends.index')->with('success','Absen berhasil di simpan');
+        }else{
+            return redirect()->route('absen')->with('success','Absen berhasil di simpan');
+        }
     }
 
     /**
@@ -195,10 +217,30 @@ class AttendController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $absen = Attend::findOrFail($id);
-        $absen->attend_time_out = request('attend_time_out');
-        $absen->save();
+        //$id = request('employee_id');
+        //dd($id);
+        $tgl = Carbon::now();
+        $emp = Employee::where('user_id','=',Auth::user()->id )->first();
+        $jam_skrg =  Carbon::now('Asia/Jakarta')->format('H:i');
 
+        $user = User::findOrFail(Auth::user()->id);
+        
+        $absen = Attend::findOrFail($id);
+        if($jam_skrg > '18:00'){
+            $absen->attend_time_out = '17:00:00';
+            $absen->attend_overtime_start = '18:00:00';
+            $absen->attend_overtime_end = Carbon::now('Asia/Jakarta')->format('H:i');
+        }else{
+            $absen->attend_time_out = Carbon::now('Asia/Jakarta')->format('H:i');
+        }
+
+        $absen->save();
+        
+        if ( $user->roles()->pluck('name')->implode(' ') =='Admin' ) {
+            return redirect()->route('attends.index')->with('success','Absen Keluar berhasil di simpan');
+        }else{
+            return redirect()->route('absen')->with('success','Absen Keluar berhasil di simpan');
+        }
         //return redirect()->route('attends.index')->with('success','Absen keluar berhasil di simpan');
     }
 
@@ -210,6 +252,34 @@ class AttendController extends Controller
         $absen->save();
 
         //return redirect()->route('attends.index')->with('success','Absen keluar berhasil di simpan');
+    }
+
+    public function updateAbsenKeluar(Request $request, $id)
+    {
+        $id = request('employee_id');
+        //dd($id);
+        $tgl = Carbon::now();
+        $emp = Employee::where('user_id','=',Auth::user()->id )->first();
+        $jam_skrg =  Carbon::now('Asia/Jakarta')->format('H:i');
+
+        $user = User::findOrFail($id);
+        
+        $absen = Attend::findOrFail($id);
+        if($jam_skrg > '18:00'){
+            $absen->attend_time_out = '17:00:00';
+            $absen->attend_overtime_start = '18:00:00';
+            $absen->attend_overtime_end = Carbon::now('Asia/Jakarta')->format('H:i');
+        }else{
+            $absen->attend_time_out = Carbon::now('Asia/Jakarta')->format('H:i');
+        }
+
+        $absen->save();
+        
+        if ( $user->roles()->pluck('name')->implode(' ') =='Admin' ) {
+            return redirect()->route('attends.index')->with('success','Absen Keluar berhasil di simpan');
+        }else{
+            return redirect()->route('absen')->with('success','Absen Keluar berhasil di simpan');
+        }
     }
 
     public function getDetailEmpLembur(Request $request, $id)

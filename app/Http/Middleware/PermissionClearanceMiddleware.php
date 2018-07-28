@@ -22,6 +22,14 @@ class PermissionClearanceMiddleware
         }
         if (Auth::user()->hasRole('User') ) 
         {
+            if ($request->is('absen'))
+            {
+                return $next($request);
+            }
+            if ($request->is('profile'))
+            {
+                return $next($request);
+            }
             if ($request->is('departments/create'))
             {
                 if (!Auth::user()->hasPermissionTo('Add Departemen'))

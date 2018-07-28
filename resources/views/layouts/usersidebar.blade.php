@@ -41,7 +41,7 @@
                     </span>
                     </a>
                     <ul class="treeview-menu">
-                    <li><a href="{{ url('attends') }}"><i class="fa fa-circle-o"></i> Absensi</a></li>
+                    <li><a href="{{ url('absen') }}"><i class="fa fa-circle-o"></i> Absensi</a></li>
                     <li><a href="{{ url('advanceds') }}"><i class="fa fa-circle-o"></i> Pengajuan Kasbon</a></li>
                     <li><a href="{{ url('calculates') }}"><i class="fa fa-circle-o"></i> Perhitungan Gaji</a></li>
                     </ul>
