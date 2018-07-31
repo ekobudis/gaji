@@ -40,8 +40,8 @@ class ReportController extends Controller
             'department' => $department
         ]);
         
-        return view('departments.pdf')->with($params);
-        //return $pdf->inline('departments.pdf');
+        //return view('departments.pdf')->with($params);
+        return $pdf->inline('departments.pdf');
     }
 
     public function getPositionPreview(Request $request)
@@ -62,8 +62,8 @@ class ReportController extends Controller
             'position' => $position
         ]);
         
-        return view('positions.pdf')->with($params);
-        //return $pdf->inline('positions.pdf');
+        //return view('positions.pdf')->with($params);
+        return $pdf->inline('positions.pdf');
     }
 
     public function getProjectPreview(Request $request)
@@ -84,8 +84,8 @@ class ReportController extends Controller
             'project' => $project
         ]);
         
-        return view('projects.pdf')->with($params);
-        //return $pdf->inline('projects.pdf');
+        //return view('projects.pdf')->with($params);
+        return $pdf->inline('projects.pdf');
     }
 
     public function getEmployeePreview(Request $request)
@@ -106,8 +106,8 @@ class ReportController extends Controller
             'pegawai' => $pegawai
         ]);
         
-        return view('employees.pdf')->with($params);
-        //return $pdf->inline('employees.pdf');
+        //return view('employees.pdf')->with($params);
+        return $pdf->inline('employees.pdf');
     }
 
     public function getUserPreview(Request $request)
@@ -128,8 +128,8 @@ class ReportController extends Controller
             'users' => $users
         ]);
         
-        return view('users.pdf')->with($params);
-        ///return $pdf->inline('users.pdf');
+        //return view('users.pdf')->with($params);
+        return $pdf->inline('users.pdf');
     }
 
     public function getAbsensiPerPegawaiPreview(Request $request,$id)
@@ -156,8 +156,8 @@ class ReportController extends Controller
             'emp' => $emp
         ]);
         
-        return view('attends.pdfabsen')->with($params);
-        //return $pdf->inline('attends.pdfabsen');
+        //return view('attends.pdfabsen')->with($params);
+        return $pdf->inline('attends.pdfabsen');
     }
 
     public function getAbsensiPegawaiPreview(Request $request)
@@ -170,7 +170,7 @@ class ReportController extends Controller
         $absens = Attend::with('pegawai','user')->where([['attend_date','>=',$tgl_awal],['attend_date','<=',$tgl_sekarang]])->get();
         //$setting = Setting::findOrFail(1);
 
-        dd($absens);
+        //dd($absens);
         $params = [
             'title'  => $title,
             'absens' => $absens,
@@ -181,8 +181,8 @@ class ReportController extends Controller
             'absens' => $absens
         ]);
         
-        return view('attends.absenall')->with($params);
-        //return $pdf->inline('attends.pdfabsen');
+        //return view('attends.absenall')->with($params);
+        return $pdf->inline('attends.absenall');
     }
 
     public function getAdvancedPreview(Request $request)
@@ -201,8 +201,8 @@ class ReportController extends Controller
             'advanced' => $advanced
         ]);
         
-        return view('advances.pdf')->with($params);
-        //return $pdf->inline('advances.pdf');
+        //return view('advances.pdf')->with($params);
+        return $pdf->inline('advances.pdf');
     }
 
     public function getReportGajiPreview(Request $request)
@@ -221,8 +221,8 @@ class ReportController extends Controller
             'calculate' => $calculate
         ]);
         
-        return view('calculates.pdf')->with($params);
-        //return $pdf->inline('calculates.pdf');
+        //return view('calculates.pdf')->with($params);
+        return $pdf->inline('calculates.pdf');
     }
 
     public function getSlipGajiPreview(Request $request,$id)
@@ -242,8 +242,8 @@ class ReportController extends Controller
             'calculate' => $calculate
         ]);
         
-        return view('calculates.slippdf')->with($params);
-        //return $pdf->inline('calculates.slippdf');
+        //return view('calculates.slippdf')->with($params);
+        return $pdf->inline('calculates.slippdf');
     }
 
     public function getFormKasbonPreview(Request $request,$id)
@@ -262,8 +262,8 @@ class ReportController extends Controller
             'kasbons' => $kasbons,
         ]);
         
-        return view('advances.formpdf')->with($params);
-        //return $pdf->inline('advances.formpdf');
+        //return view('advances.formpdf')->with($params);
+        return $pdf->inline('advances.formpdf');
     }
 
     public function getAttendPreview(Request $request,$dari_tanggal, $sampai_tanggal)
