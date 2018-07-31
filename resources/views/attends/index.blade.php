@@ -47,7 +47,7 @@
                 <!-- /.card-header -->
                 <div class="box-body">
                     <a href="{{ url('attends/create') }}" class="btn bg-blue btn-xs btn-icon"><i class="fa fa-plus"></i></a>
-                    <a href="{{ url('preview-attends') }}" target="_blank" class="btn bg-default btn-xs btn-icon"><i class="fa fa-print"></i></a>
+                    <a href="{{ url('preview_absen') }}" target="_blank" class="btn bg-default btn-xs btn-icon"><i class="fa fa-print"></i></a>
                     <table class="table table-bordered table-striped datatable-show-all" id="absen_data">
                         <thead>
                             <tr>

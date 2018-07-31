@@ -83,7 +83,7 @@
                             <a href="#settings" data-toggle="tab">Absensi Bulan Ini :  {{ \Carbon\Carbon::parse($tgl_awal)->format('d-M-Y') }} sampai {{ \Carbon\Carbon::parse($tgl_sekarang)->format('d-M-Y') }} </a>
                         </li>
                         <div class="text-right">
-                            <a href="{{ url('preview-absensi/'.$emp->id) }}" target="_blank"><i class="fa fa-print"></i></a>
+                            <a href="{{ url('lap_absensipegawai/'.$emp->id) }}" target="_blank"><i class="fa fa-print"></i></a>
                         </div>
                     </ul>
                     <div class="tab-content">

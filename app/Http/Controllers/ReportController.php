@@ -167,21 +167,21 @@ class ReportController extends Controller
         $tgl_sekarang = Carbon::now()->format('Y-m-d');
         $tgl_awal =Carbon::create(Carbon::now()->format('Y'),Carbon::now()->format('m'),1)->format('Y-m-d');
         
-        $absens = Attend::with('pegawai','user')->where([['employee_id','43'],['attend_date','>=',$tgl_awal],['attend_date','<=',$tgl_sekarang]])->get();
+        $absens = Attend::with('pegawai','user')->where([['attend_date','>=',$tgl_awal],['attend_date','<=',$tgl_sekarang]])->get();
         //$setting = Setting::findOrFail(1);
 
-        ///dd($absens);
+        dd($absens);
         $params = [
             'title'  => $title,
             'absens' => $absens,
         ];
 
-        $pdf = PDF::loadView('attends.pdfabsen', [
+        $pdf = PDF::loadView('attends.absenall', [
             'title'  => $title,
             'absens' => $absens
         ]);
         
-        return view('attends.pdfabsen')->with($params);
+        return view('attends.absenall')->with($params);
         //return $pdf->inline('attends.pdfabsen');
     }
 
