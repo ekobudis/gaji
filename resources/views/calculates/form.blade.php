@@ -151,6 +151,8 @@
                         console.log(data);
                         $('#gajian').show();
                         $('#save_data').show();
+                        alert('Kalkulasi Gaji berhasil di selesaikan');
+                        window.location.href = "{{ url('calculates') }}";
                     }
                 });
                 return false;

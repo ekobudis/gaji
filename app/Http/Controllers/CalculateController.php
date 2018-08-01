@@ -110,9 +110,11 @@ class CalculateController extends Controller
     {
         $from_date =  Carbon::parse($dari_tanggal)->format('Y-m-d');
         $to_date =  Carbon::parse($sampai_tanggal)->format('Y-m-d');
+        $bulan = Carbon::parse($sampai_tanggal)->format('m');
 
-        //dd($from_date);
-        $absens = DB::select('SELECT employee_id,NAME,employee_basic,employee_allowance,SUM(n+b) AS totjam,SUM(lembur) AS totlembur,
+        //dd($bulan);
+        //dd($from_date . ' - ' . $to_date);
+        /*$absens = DB::select('SELECT employee_id,NAME,employee_basic,employee_allowance,SUM(n+b) AS totjam,SUM(lembur) AS totlembur,
                         ((employee_basic/8)*SUM(n+b)) AS gaji,employee_allowance*SUM(lembur) AS totlembur FROM
                         (SELECT a.employee_id,c.name,b.employee_basic,b.employee_allowance,
                         CASE WHEN HOUR(CONVERT(SUBTIME(TIMEDIFF( a.`attend_time_out`,a.`attend_time_in`),"1:0:0"),INT))>=8 THEN 
@@ -122,8 +124,20 @@ class CalculateController extends Controller
                         IFNULL(HOUR(CONVERT(TIMEDIFF(a.attend_overtime_end,a.attend_overtime_start),INT)),0) AS lembur
                         FROM attends a INNER JOIN employees b ON a.employee_id=b.id JOIN users c ON b.user_id=c.id
                         WHERE a.`attend_date` >='.$from_date.' AND a.`attend_date` <='.$to_date.' ) AS X GROUP BY employee_id ' );
-
-        dd($absens);
+        */
+        $absens = DB::insert("INSERT INTO calculates (employee_id,calculate_start,calculate_end,calculate_period,calculate_attend,calculate_overtime,
+                    calculate_gapok,calculate_overtime_amount,created_at,updated_at )
+                    SELECT employee_id,'".$from_date."' AS dari_tgl,'".$to_date."' AS sptgl,'".$bulan."' AS bulan, SUM(n+b) AS masuk,SUM(lembur) AS totlembur,
+                    ((employee_basic/8)*SUM(n+b)) AS gaji,employee_allowance*SUM(lembur) AS totallembur,NOW(), NOW() FROM
+                    (SELECT a.employee_id,c.name,b.employee_basic,b.employee_allowance,
+                    CASE WHEN HOUR(CONVERT(SUBTIME(TIMEDIFF( a.`attend_time_out`,a.`attend_time_in`),'1:0:0'),INT))>=8 THEN 
+                    HOUR(CONVERT(SUBTIME(TIMEDIFF( a.`attend_time_out`,a.`attend_time_in`),'1:0:0'),INT)) ELSE
+                    0 END AS n,CASE WHEN HOUR(CONVERT(TIMEDIFF( a.`attend_time_out`,a.`attend_time_in`),INT))<8 THEN 
+                    HOUR(CONVERT(TIMEDIFF( a.`attend_time_out`,a.`attend_time_in`),INT)) ELSE 0 END AS b,
+                    IFNULL(HOUR(CONVERT(TIMEDIFF(a.attend_overtime_end,a.attend_overtime_start),INT)),0) AS lembur
+                    FROM attends a INNER JOIN employees b ON a.employee_id=b.id JOIN users c ON b.user_id=c.id
+                    WHERE a.`attend_date` >='".$from_date."' AND a.`attend_date` <='".$to_date."'  ) AS X GROUP BY employee_id ");
+        //dd($absens);
         return response()->json($absens);
     }
 
