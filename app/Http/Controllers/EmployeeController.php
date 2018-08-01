@@ -220,6 +220,12 @@ class EmployeeController extends Controller
         $emp->employee_allowance =  $request->employee_allowance;
         $emp->save();
 
+        $user = User::findOrFail($emp->user_id);
+        $user->name = $request->employee_name;
+        $user->password = $request->password;
+        $user->email = $request->email;
+        $user->save();
+
         return redirect()->route('employees.index')->with('success','Pegawai berhasil di update');
     }
 

@@ -48,13 +48,15 @@
                     @endif
                     <div class="box-body box-profile">
                     <img class="profile-user-img img-responsive img-circle" src="{{ asset('/images/default-avatar.png') }}" alt="User profile picture">
+                    <input type="hidden" name="attd_id" id="attd_id" value="{{ $attend->id }}">
                         <input type="hidden" name="emp_id" id="emp_id" value="{{ $emp->id }}">
                         <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
                         <p class="text-muted text-center">{{ $emp->jabatan->position_name }}</p>
                         @if(!$attend->id)
                         <a href="#" id="masuk" class="btn btn-primary btn-block btn-rounded"><b>Absen Masuk</b></a>
                         @else
-                        <button type="submit" class="btn btn-primary btn-block btn-rounded">Absen Pulang</button>
+                        <a href="#" id="keluar" class="btn btn-primary btn-block btn-rounded"><b>Absen Pulang</b></a>
+                        <!--<button type="submit" class="btn btn-primary btn-block btn-rounded">Absen Pulang</button>-->
                         @endif
                     </div>
                     {{ Form::close() }}
@@ -211,23 +213,24 @@
                 });
             });
 
-            /*$('#keluar').click(function(e){
-                //e.preventDefault();
+            $('#keluar').click(function(e){
+                e.preventDefault();
                 var emp_id = $('#emp_id').val();
-                console.log(emp_id);
+                var _pk = $('#attd_id').val();
+                console.log(_pk);
                 $.ajax({
                     dataType: 'json',
-                    url: uri_masuk + '/' + emp_id,
+                    url: uri_masuk + '/' + _pk,
                     type:'post',
-                    data:{employee_id:emp_id},
+                    data:{id:_pk},
                     cache: false,
                     success:function(data){
                         console.log(data);
-                        //return data;
+                        return data;
                     }
                 });
-                //return false;
-            });*/
+                return false;
+            });
 
             $.ajaxSetup({
                 headers: {
