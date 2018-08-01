@@ -74,7 +74,7 @@ class CalculateController extends Controller
             'payrolls' => $payrolls,
         ];
 
-        return view('calculates.index')->with($param);
+        return view('calculates.listgaji')->with($param);
     }
 
     public function list_datagaji()

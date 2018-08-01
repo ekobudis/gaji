@@ -188,7 +188,7 @@
                 'columnDefs': [
                     { 'visible': false }
                 ],
-                'displayLength': 50,
+                'displayLength': 25,
             });
 
         function attendOut(id){

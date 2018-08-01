@@ -210,7 +210,7 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $emp = Employee::findOrFail($id);
-        $emp->employee_id =  $request->employee_id;
+        $emp->employee_code =  $request->employee_code;
         $emp->employee_name =  $request->employee_name;
         $emp->employee_birthdate =  $request->employee_birthdate;
         $emp->employee_join_date =  $request->employee_join_date;
